@@ -1,0 +1,196 @@
+<div class="min-h-screen flex justify-center items-center py-12 px-4 bg-white relative overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-96 bg-black skew-y-3 transform -translate-y-24 z-0"></div>
+  <div
+    class="absolute bottom-0 left-0 w-80 h-80 bg-emerald-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob">
+  </div>
+  <div
+    class="absolute top-10 right-10 w-64 h-64 bg-emerald-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000">
+  </div>
+
+  <div class="bg-white rounded-xl shadow-2xl relative z-10 w-full max-w-4xl overflow-hidden border border-slate-100">
+    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-black via-emerald-500 to-black"></div>
+
+    <div class="text-center pt-10 pb-6 px-8">
+      <div
+        class="w-16 h-16 rounded-xl bg-black flex items-center justify-center text-emerald-400 mx-auto mb-6 shadow-xl shadow-emerald-900/10 transform rotate-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="w-8 h-8">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+        </svg>
+      </div>
+      <h2 class="text-3xl font-bold text-black font-primary">Rejoignez l'élite EgaBank</h2>
+      <p class="text-slate-500 mt-3 font-medium">Ouvrez votre compte en 5 minutes depuis Lomé ou partout ailleurs.</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="register()" class="p-8 md:p-12 space-y-10">
+
+      <div class="relative">
+        <h3 class="text-lg font-bold text-black mb-6 flex items-center gap-3">
+          <span
+            class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shadow-sm">
+            1
+          </span>
+          Informations Personnelles
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Nom</label>
+            <input formControlName="lastName" type="text"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="Ex: ADANLETE" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Prénom</label>
+            <input formControlName="firstName" type="text"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="Ex: Koffi" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Date de naissance</label>
+            <input formControlName="birthDate" type="date"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium text-slate-600" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Sexe</label>
+            <div class="flex gap-4">
+              <label class="flex-1 cursor-pointer group">
+                <input formControlName="sex" type="radio" class="peer sr-only" value="M" />
+                <div
+                  class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-500 peer-checked:bg-black peer-checked:text-white peer-checked:border-black transition-all font-medium hover:bg-slate-100">
+                  Masculin
+                </div>
+              </label>
+              <label class="flex-1 cursor-pointer group">
+                <input formControlName="sex" type="radio" class="peer sr-only" value="F" />
+                <div
+                  class="flex items-center justify-center px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-500 peer-checked:bg-black peer-checked:text-white peer-checked:border-black transition-all font-medium hover:bg-slate-100">
+                  Féminin
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full h-px bg-slate-100"></div>
+
+      <div class="relative">
+        <h3 class="text-lg font-bold text-black mb-6 flex items-center gap-3">
+          <span
+            class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shadow-sm">
+            2
+          </span>
+          Coordonnées Togolaises
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2 space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Quartier / Ville</label>
+            <input formControlName="address" type="text"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="Ex: Agoë-Assiyéyé, Lomé" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Numéro de téléphone</label>
+            <input formControlName="phone" type="tel"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="+228 90 00 00 00" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Nationalité</label>
+            <div class="relative">
+              <select formControlName="nationality"
+                      class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium appearance-none">
+                <option value="" disabled selected>Choisir votre pays...</option>
+                <option value="Togolaise">Togolaise</option>
+                <option value="Béninoise">Béninoise</option>
+                <option value="Ghanéenne">Ghanéenne</option>
+                <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+              </select>
+              <div class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-slate-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full h-px bg-slate-100"></div>
+
+      <div class="relative">
+        <h3 class="text-lg font-bold text-black mb-6 flex items-center gap-3">
+          <span
+            class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shadow-sm">
+            3
+          </span>
+          Sécurité du compte
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2 space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Email personnel</label>
+            <input formControlName="email" type="email"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="votre.nom@exemple.tg" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Code Secret (Mot de passe)</label>
+            <input formControlName="password" type="password"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="Minimum 8 caractères" />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Confirmation</label>
+            <input formControlName="confirmPassword" type="password"
+                   class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-50 outline-none transition-all font-medium placeholder:text-slate-400"
+                   placeholder="Confirmez votre code" />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="error"
+           class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-r-lg text-sm flex items-center gap-3 animate-fade-in">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clip-rule="evenodd" />
+        </svg>
+        {{ error }}
+      </div>
+
+      <div class="pt-6">
+        <button type="submit" [disabled]="submitting || form.invalid"
+                class="w-full bg-black hover:bg-emerald-700 text-white font-bold py-5 rounded-lg shadow-xl shadow-black/10 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 text-lg">
+          <span *ngIf="!submitting">Devenir Membre EgaBank</span>
+          <span *ngIf="submitting" class="flex items-center gap-2">
+            <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+              </path>
+            </svg>
+            Initialisation...
+          </span>
+        </button>
+      </div>
+
+      <div class="text-center">
+        <p class="text-slate-500">
+          Déjà client ?
+          <a routerLink="/login" class="text-emerald-600 font-bold hover:text-emerald-700 hover:underline">Se connecter à mon espace</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

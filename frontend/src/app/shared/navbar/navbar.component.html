@@ -1,0 +1,37 @@
+<nav class="bg-black/95 backdrop-blur-md sticky top-0 z-50 border-b border-emerald-500/10">
+  <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+    <a routerLink="/" class="flex items-center gap-3 group cursor-pointer">
+      <div
+        class="w-10 h-10 rounded-lg bg-gradient-to-tr from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+        </svg>
+      </div>
+      <div>
+        <span class="text-2xl font-bold text-white tracking-tight font-primary block leading-none">EgaBank</span>
+        <span class="text-[10px] text-emerald-500 font-bold uppercase tracking-[0.2em]">Togo</span>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10">
+      <a *ngFor="let link of navLinks" [href]="link.href"
+         class="text-xs font-bold text-slate-300 hover:text-emerald-400 transition-all uppercase tracking-widest relative group">
+        {{ link.label }}
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all group-hover:w-full"></span>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <a routerLink="/login"
+         class="hidden md:block text-xs font-bold text-white hover:text-emerald-400 cursor-pointer transition-colors uppercase tracking-widest">
+        Mon Espace
+      </a>
+      <a routerLink="/register"
+         class="px-6 py-2.5 bg-emerald-600 text-white text-xs font-black rounded-full shadow-lg shadow-emerald-900/20 hover:bg-white hover:text-black transition-all transform hover:-translate-y-0.5 cursor-pointer uppercase tracking-tighter">
+        Devenir Membre
+      </a>
+    </div>
+  </div>
+</nav>

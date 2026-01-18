@@ -1,0 +1,133 @@
+<header class="relative pt-16 pb-32 flex content-center items-center justify-center min-h-[90vh] overflow-hidden bg-black">
+  <div class="absolute top-0 w-full h-full z-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-black via-slate-900 to-emerald-950 opacity-90"></div>
+    <div
+      class="absolute top-0 right-0 w-[800px] h-[800px] bg-emerald-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10 animate-blob">
+    </div>
+    <div
+      class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white rounded-full mix-blend-overlay filter blur-[128px] opacity-5 animate-blob animation-delay-2000">
+    </div>
+  </div>
+
+  <div class="container relative mx-auto z-10 px-4">
+    <div class="items-center flex flex-wrap">
+      <div class="w-full lg:w-8/12 px-4 ml-auto mr-auto text-center">
+        <div class="pr-12">
+          <h1 class="text-white font-bold text-5xl md:text-7xl leading-tight mb-8 animate-fade-in-up font-primary">
+            L'art de la banque <br />
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">d'excellence.</span>
+          </h1>
+          <p class="mt-4 text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Redéfinissez votre expérience financière avec une institution qui allie tradition d'excellence et innovation
+            technologique.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <a routerLink="/register"
+               class="px-10 py-5 bg-emerald-600 text-white font-bold rounded-2xl shadow-xl shadow-emerald-900/40 hover:bg-emerald-500 transition-all transform hover:-translate-y-1 cursor-pointer text-lg tracking-wide uppercase">
+              Devenir Membre
+            </a>
+            <a href="#"
+               class="px-10 py-5 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-2xl shadow-lg hover:bg-white/20 transition-all transform hover:-translate-y-1 text-lg tracking-wide uppercase">
+              Découvrir l'univers
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="py-24 bg-white relative z-10">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-sm font-bold text-emerald-600 uppercase tracking-widest mb-3">Pourquoi nous choisir</h2>
+      <h3 class="text-4xl font-bold text-black font-primary">Une expertise unique au service de vos ambitions</h3>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-8">
+      <div *ngFor="let feature of features" class="w-full md:w-1/3 lg:w-1/4 px-4 text-center">
+        <div
+          class="relative flex flex-col h-full min-w-0 break-words bg-white w-full mb-8 shadow-sm hover:shadow-2xl transition-all duration-300 rounded-3xl p-8 border border-slate-100 group">
+          <div
+            class="w-16 h-16 shadow-lg rounded-2xl bg-black text-emerald-400 mx-auto mb-6 flex items-center justify-center transform transition-transform group-hover:bg-emerald-600 group-hover:text-white duration-300">
+            <div [innerHTML]="feature.icon"></div>
+          </div>
+          <h6 class="text-xl font-bold text-black mb-4 font-primary">{{ feature.title }}</h6>
+          <p class="mt-2 text-slate-500 leading-relaxed">{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center mt-32 bg-slate-50 rounded-3xl p-8 md:p-16 shadow-inner overflow-hidden relative border border-slate-100">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
+
+      <div class="w-full md:w-5/12 px-4 mr-auto ml-auto relative z-10">
+        <div
+          class="text-emerald-700 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-2xl bg-white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          </svg>
+        </div>
+        <h3 class="text-4xl mb-4 font-bold leading-tight text-black font-primary">
+          Une technologie de pointe,<br />une sécurité absolue.
+        </h3>
+        <p class="text-lg font-light leading-relaxed mt-4 mb-8 text-slate-600">
+          Notre plateforme E-Banking a été conçue pour vous offrir une rapidité et une fiabilité inégalées.
+          Consultez votre solde en temps réel et gérez votre épargne avec une interface d'une élégance rare.
+        </p>
+        <a href="#"
+           class="font-bold text-black hover:text-emerald-600 mt-4 inline-flex items-center gap-2 group transition-colors uppercase tracking-wide text-sm">
+          En savoir plus
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+               class="w-4 h-4 transform group-hover:translate-x-1 transition-transform">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="w-full md:w-5/12 px-4 mr-auto ml-auto mt-12 md:mt-0 relative z-10">
+        <div
+          class="relative flex flex-col min-w-0 break-words bg-black w-full mb-6 shadow-2xl rounded-2xl overflow-hidden transform rotate-2 hover:rotate-0 transition-transform duration-500">
+          <div class="h-48 bg-cover bg-center"
+               style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+            <div class="w-full h-full bg-emerald-900/20"></div>
+          </div>
+          <blockquote class="relative p-8 mb-4">
+            <svg aria-hidden="true" class="w-10 h-10 text-emerald-500 mb-4" viewBox="0 0 24 27" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M14.017 20L14.017 18C14.017 16.0544 15.56 14.7712 17.519 13.9184C18.648 13.432 19.336 12.3088 19.336 10.9768C19.336 9.0432 17.76 7.6432 15.864 7.6432C13.936 7.6432 12.36 9.0432 12.36 10.9768V12H9.016V10.9768C9.016 7.2016 12.184 4.144 15.864 4.144C19.544 4.144 22.712 7.2016 22.712 10.9768C22.712 13.4736 21.376 15.7072 19.464 16.5392C18.424 17.0016 17.768 17.6576 17.768 18.272V20H14.017ZM0 10.9768V12H3.344V10.9768C3.344 7.2016 6.512 4.144 10.192 4.144V7.6432C8.264 7.6432 6.688 9.0432 6.688 10.9768V12H9.016V12.104C9.016 12.016 9.016 11.976 9.016 12H3.344V20H0V18C0 16.0544 1.544 14.7712 3.503 13.9184C4.632 13.432 5.32 12.3088 5.32 10.9768C5.32 9.0432 3.744 7.6432 1.848 7.6432C-0.080 7.6432 -1.656 9.0432 -1.656 10.9768V12H0V10.9768Z"
+                fill="currentColor" />
+            </svg>
+            <h4 class="text-xl font-bold text-white mb-2">Service Exceptionnel</h4>
+            <p class="text-md font-light text-slate-300 italic">
+              "EgaBank a transformé ma vision de la gestion de patrimoine. L'interface est aussi intuitive que magnifique."
+            </p>
+            <div class="mt-4 flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-600"></div>
+              <div class="text-sm font-bold text-white">Jean Dupont <span class="text-slate-500 font-normal">| CEO Tech</span></div>
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-24 bg-black border-t border-emerald-900/30">
+  <div class="container mx-auto px-4 text-center relative z-10">
+    <h2 class="text-4xl font-bold mb-6 text-white font-primary">L'excellence n'attend pas.</h2>
+    <p class="text-xl text-slate-400 mb-10 max-w-xl mx-auto">Rejoignez le cercle restreint de nos membres et accédez à
+      une nouvelle dimension bancaire dès aujourd'hui.</p>
+    <a routerLink="/register"
+       class="inline-block px-10 py-5 bg-emerald-600 text-white font-bold rounded-2xl shadow-xl shadow-emerald-500/10 hover:bg-emerald-500 transition-colors cursor-pointer text-lg tracking-wide uppercase transform hover:-translate-y-1">
+      Ouvrir mon compte
+    </a>
+  </div>
+  <div
+    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-64 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none">
+  </div>
+</section>

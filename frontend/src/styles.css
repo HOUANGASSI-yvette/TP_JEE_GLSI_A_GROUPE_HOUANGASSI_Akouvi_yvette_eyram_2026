@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+:root {
+  --primary-dark: #0f172a;  /* Deep Navy */
+  --primary-light: #1e293b; /* Lighter Navy */
+  --accent-gold: #fbbf24;   /* Premium Gold */
+  --accent-hover: #d97706;  /* Darker Gold for hover */
+  --surface-light: #f8fafc; /* Light background */
+  --surface-white: #ffffff; /* Card background */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+}
+
+body {
+  background-color: var(--surface-light);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
+/* Glassmorphism Utilities */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(241, 245, 249, 1);
+}
