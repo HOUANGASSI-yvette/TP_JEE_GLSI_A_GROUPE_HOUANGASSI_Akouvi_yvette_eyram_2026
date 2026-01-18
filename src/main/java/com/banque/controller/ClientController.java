@@ -19,8 +19,10 @@ public class ClientController {
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getAllClients() {
         try {
-            return ResponseEntity.ok(clientService.getAllClients());
+            List<ClientDTO> clients = clientService.getAllClients();
+            return ResponseEntity.ok(clients != null ? clients : java.util.Collections.emptyList());
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

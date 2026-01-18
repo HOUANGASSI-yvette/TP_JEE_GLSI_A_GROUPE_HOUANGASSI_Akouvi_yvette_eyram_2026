@@ -1,0 +1,130 @@
+<div class="px-4 py-6 sm:px-0">
+  <div class="mb-8">
+    <h1 class="text-2xl font-semibold text-gray-900">{{ isEditMode ? 'Modifier le client' : 'Nouveau client' }}</h1>
+    <p class="mt-1 text-sm text-gray-600">{{ isEditMode ? 'Modifiez les informations du client' : 'Remplissez le formulaire pour créer un nouveau client' }}</p>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="p-8">
+        @if (error) {
+          <div class="mb-6 bg-red-50 border-l-4 border-red-400 rounded-md p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-red-800">{{ error }}</p>
+              </div>
+            </div>
+          </div>
+        }
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <label for="prenom" class="block text-sm font-medium text-gray-700 mb-2">Prénom *</label>
+            <input type="text" id="prenom" formControlName="prenom" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('prenom')?.invalid && clientForm.get('prenom')?.touched"
+                   placeholder="Entrez le prénom">
+            @if (clientForm.get('prenom')?.invalid && clientForm.get('prenom')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">Le prénom est requis</p>
+            }
+          </div>
+
+          <div>
+            <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
+            <input type="text" id="nom" formControlName="nom" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('nom')?.invalid && clientForm.get('nom')?.touched"
+                   placeholder="Entrez le nom">
+            @if (clientForm.get('nom')?.invalid && clientForm.get('nom')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">Le nom est requis</p>
+            }
+          </div>
+
+          <div>
+            <label for="dateNaissance" class="block text-sm font-medium text-gray-700 mb-2">Date de naissance *</label>
+            <input type="date" id="dateNaissance" formControlName="dateNaissance" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('dateNaissance')?.invalid && clientForm.get('dateNaissance')?.touched">
+            @if (clientForm.get('dateNaissance')?.invalid && clientForm.get('dateNaissance')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">La date de naissance est requise</p>
+            }
+          </div>
+
+          <div>
+            <label for="sexe" class="block text-sm font-medium text-gray-700 mb-2">Sexe *</label>
+            <select id="sexe" formControlName="sexe" 
+                    class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                    [class.border-red-300]="clientForm.get('sexe')?.invalid && clientForm.get('sexe')?.touched">
+              <option value="">Sélectionner</option>
+              <option value="M">Masculin</option>
+              <option value="F">Féminin</option>
+            </select>
+            @if (clientForm.get('sexe')?.invalid && clientForm.get('sexe')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">Le sexe est requis</p>
+            }
+          </div>
+
+          <div>
+            <label for="courriel" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+            <input type="email" id="courriel" formControlName="courriel" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('courriel')?.invalid && clientForm.get('courriel')?.touched"
+                   placeholder="exemple@email.com">
+            @if (clientForm.get('courriel')?.invalid && clientForm.get('courriel')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">Un email valide est requis</p>
+            }
+          </div>
+
+          <div>
+            <label for="numTelephone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone *</label>
+            <input type="tel" id="numTelephone" formControlName="numTelephone" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('numTelephone')?.invalid && clientForm.get('numTelephone')?.touched"
+                   placeholder="+33 6 12 34 56 78">
+            @if (clientForm.get('numTelephone')?.invalid && clientForm.get('numTelephone')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">Le téléphone est requis</p>
+            }
+          </div>
+
+          <div>
+            <label for="adresse" class="block text-sm font-medium text-gray-700 mb-2">Adresse *</label>
+            <input type="text" id="adresse" formControlName="adresse" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('adresse')?.invalid && clientForm.get('adresse')?.touched"
+                   placeholder="123 Rue de la République">
+            @if (clientForm.get('adresse')?.invalid && clientForm.get('adresse')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">L'adresse est requise</p>
+            }
+          </div>
+
+          <div>
+            <label for="nationalite" class="block text-sm font-medium text-gray-700 mb-2">Nationalité *</label>
+            <input type="text" id="nationalite" formControlName="nationalite" 
+                   class="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+                   [class.border-red-300]="clientForm.get('nationalite')?.invalid && clientForm.get('nationalite')?.touched"
+                   placeholder="Française">
+            @if (clientForm.get('nationalite')?.invalid && clientForm.get('nationalite')?.touched) {
+              <p class="mt-1.5 text-sm text-red-600">La nationalité est requise</p>
+            }
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-6 mt-6 border-t border-gray-200">
+          <a routerLink="/clients" 
+             class="px-5 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+            Annuler
+          </a>
+          <button type="submit" 
+                  [disabled]="clientForm.invalid"
+                  class="px-5 py-2.5 border border-transparent rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
+          </button>
+        </div>
+      </form>
+  </div>
+</div>
+

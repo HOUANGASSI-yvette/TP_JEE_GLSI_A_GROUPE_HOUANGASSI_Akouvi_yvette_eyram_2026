@@ -64,6 +64,9 @@ public class ClientServiceImpl implements ClientService {
     
     @Override
     public ClientDTO getClientById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID du client ne peut pas être null");
+        }
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + id));
         return toDTO(client);
@@ -71,20 +74,30 @@ public class ClientServiceImpl implements ClientService {
     
     @Override
     public ClientDTO createClient(ClientDTO clientDTO) {
+        if (clientDTO == null) {
+            throw new IllegalArgumentException("Le client DTO ne peut pas être null");
+        }
         // Vérifier si le courriel existe déjà
         if (clientRepository.findByCourriel(clientDTO.getCourriel()).isPresent()) {
             throw new RuntimeException("Un client avec ce courriel existe déjà");
         }
         
         Client client = toEntity(clientDTO);
+        if (client == null) {
+            throw new RuntimeException("Erreur lors de la conversion du client DTO en entité");
+        }
         Client savedClient = clientRepository.save(client);
         return toDTO(savedClient);
     }
     
     @Override
     public ClientDTO updateClient(Long id, ClientDTO clientDTO) {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + id));
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID du client ne peut pas être null");
+        }
+        Long clientId = id;
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + clientId));
         
         // Vérifier si le courriel est modifié et s'il existe déjà
         if (!client.getCourriel().equals(clientDTO.getCourriel())) {
@@ -108,6 +121,9 @@ public class ClientServiceImpl implements ClientService {
     
     @Override
     public void deleteClient(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID du client ne peut pas être null");
+        }
         if (!clientRepository.existsById(id)) {
             throw new RuntimeException("Client non trouvé avec l'ID: " + id);
         }

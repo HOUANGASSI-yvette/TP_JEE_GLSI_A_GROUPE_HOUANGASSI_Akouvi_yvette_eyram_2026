@@ -95,6 +95,9 @@ public class CompteServiceImpl implements CompteService {
     
     @Override
     public CompteDTO getCompteById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID du compte ne peut pas être null");
+        }
         Compte compte = compteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Compte non trouvé avec l'ID: " + id));
         return toDTO(compte);
@@ -102,6 +105,9 @@ public class CompteServiceImpl implements CompteService {
     
     @Override
     public List<CompteDTO> getComptesByClient(Long clientId) {
+        if (clientId == null) {
+            throw new IllegalArgumentException("L'ID du client ne peut pas être null");
+        }
         return compteRepository.findByClientId(clientId)
                 .stream()
                 .map(this::toDTO)
@@ -110,9 +116,13 @@ public class CompteServiceImpl implements CompteService {
     
     @Override
     public CompteDTO createCompte(CompteDTO compteDTO) {
+        if (compteDTO == null || compteDTO.getClientId() == null) {
+            throw new IllegalArgumentException("Le compte DTO et l'ID du client ne peuvent pas être null");
+        }
         // Vérifier si le client existe
-        Client client = clientRepository.findById(compteDTO.getClientId())
-                .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + compteDTO.getClientId()));
+        Long clientId = compteDTO.getClientId();
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + clientId));
         
         // Générer automatiquement un IBAN si non fourni
         String numCompte;
@@ -120,7 +130,8 @@ public class CompteServiceImpl implements CompteService {
             numCompte = generateIban();
         } else {
             // Vérifier si le numéro de compte fourni existe déjà
-            if (compteRepository.findByNumCompte(compteDTO.getNumCompte()).isPresent()) {
+            String numCompteToCheck = compteDTO.getNumCompte();
+            if (numCompteToCheck != null && compteRepository.findByNumCompte(numCompteToCheck).isPresent()) {
                 throw new RuntimeException("Un compte avec ce numéro existe déjà");
             }
             // Valider le format IBAN si fourni
@@ -139,6 +150,9 @@ public class CompteServiceImpl implements CompteService {
     
     @Override
     public CompteDTO updateCompte(Long id, CompteDTO compteDTO) {
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID du compte ne peut pas être null");
+        }
         Compte compte = compteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Compte non trouvé avec l'ID: " + id));
         
@@ -163,9 +177,10 @@ public class CompteServiceImpl implements CompteService {
         compte.setSolde(compteDTO.getSolde());
         
         // Mettre à jour le client si fourni
-        if (compteDTO.getClientId() != null && !compte.getClient().getId().equals(compteDTO.getClientId())) {
-            Client client = clientRepository.findById(compteDTO.getClientId())
-                    .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + compteDTO.getClientId()));
+        if (compteDTO.getClientId() != null && compte.getClient() != null && !compte.getClient().getId().equals(compteDTO.getClientId())) {
+            Long newClientId = compteDTO.getClientId();
+            Client client = clientRepository.findById(newClientId)
+                    .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'ID: " + newClientId));
             compte.setClient(client);
         }
         
@@ -175,9 +190,13 @@ public class CompteServiceImpl implements CompteService {
     
     @Override
     public void deleteCompte(Long id) {
-        if (!compteRepository.existsById(id)) {
-            throw new RuntimeException("Compte non trouvé avec l'ID: " + id);
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID du compte ne peut pas être null");
         }
-        compteRepository.deleteById(id);
+        Long compteId = id;
+        if (!compteRepository.existsById(compteId)) {
+            throw new RuntimeException("Compte non trouvé avec l'ID: " + compteId);
+        }
+        compteRepository.deleteById(compteId);
     }
 }

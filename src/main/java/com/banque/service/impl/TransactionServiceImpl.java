@@ -44,6 +44,9 @@ public class TransactionServiceImpl implements TransactionService {
     
     @Override
     public TransactionDTO effectuerDepot(Long compteId, BigDecimal montant, String description) {
+        if (compteId == null) {
+            throw new IllegalArgumentException("L'ID du compte ne peut pas être null");
+        }
         // Vérifier que le montant est positif
         if (montant == null || montant.compareTo(BigDecimal.ZERO) <= 0) {
             throw new RuntimeException("Le montant doit être supérieur à zéro");
@@ -76,6 +79,9 @@ public class TransactionServiceImpl implements TransactionService {
     
     @Override
     public TransactionDTO effectuerRetrait(Long compteId, BigDecimal montant, String description) {
+        if (compteId == null) {
+            throw new IllegalArgumentException("L'ID du compte ne peut pas être null");
+        }
         // Vérifier que le montant est positif
         if (montant == null || montant.compareTo(BigDecimal.ZERO) <= 0) {
             throw new RuntimeException("Le montant doit être supérieur à zéro");
@@ -113,6 +119,9 @@ public class TransactionServiceImpl implements TransactionService {
     
     @Override
     public TransactionDTO effectuerTransfert(Long compteSourceId, Long compteDestinationId, BigDecimal montant, String description) {
+        if (compteSourceId == null || compteDestinationId == null) {
+            throw new IllegalArgumentException("Les IDs des comptes ne peuvent pas être null");
+        }
         // Vérifier que le montant est positif
         if (montant == null || montant.compareTo(BigDecimal.ZERO) <= 0) {
             throw new RuntimeException("Le montant doit être supérieur à zéro");
@@ -164,6 +173,9 @@ public class TransactionServiceImpl implements TransactionService {
     
     @Override
     public List<TransactionDTO> getTransactionsByCompte(Long compteId) {
+        if (compteId == null) {
+            throw new IllegalArgumentException("L'ID du compte ne peut pas être null");
+        }
         Compte compte = compteRepository.findById(compteId)
                 .orElseThrow(() -> new RuntimeException("Compte non trouvé avec l'ID: " + compteId));
         
@@ -175,6 +187,9 @@ public class TransactionServiceImpl implements TransactionService {
     
     @Override
     public TransactionDTO getTransactionById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("L'ID de la transaction ne peut pas être null");
+        }
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Transaction non trouvée avec l'ID: " + id));
         return toDTO(transaction);

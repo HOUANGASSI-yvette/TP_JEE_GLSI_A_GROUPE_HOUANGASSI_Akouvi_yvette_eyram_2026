@@ -19,8 +19,10 @@ public class CompteController {
     @GetMapping
     public ResponseEntity<List<CompteDTO>> getAllComptes() {
         try {
-            return ResponseEntity.ok(compteService.getAllComptes());
+            List<CompteDTO> comptes = compteService.getAllComptes();
+            return ResponseEntity.ok(comptes != null ? comptes : java.util.Collections.emptyList());
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -46,16 +48,26 @@ public class CompteController {
     }
     
     @PostMapping
-    public ResponseEntity<CompteDTO> createCompte(@RequestBody CompteDTO compteDTO) {
+    public ResponseEntity<?> createCompte(@RequestBody CompteDTO compteDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(compteService.createCompte(compteDTO));
+            CompteDTO created = compteService.createCompte(compteDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
         } catch (RuntimeException e) {
-            if (e.getMessage().contains("non trouvé")) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            e.printStackTrace();
+            if (e.getMessage() != null && e.getMessage().contains("non trouvé")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(java.util.Map.of("message", e.getMessage()));
             }
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            if (e.getMessage() != null && e.getMessage().contains("existe déjà")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(java.util.Map.of("message", e.getMessage()));
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(java.util.Map.of("message", e.getMessage() != null ? e.getMessage() : "Erreur lors de la création du compte"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(java.util.Map.of("message", "Erreur serveur: " + e.getMessage()));
         }
     }
     
