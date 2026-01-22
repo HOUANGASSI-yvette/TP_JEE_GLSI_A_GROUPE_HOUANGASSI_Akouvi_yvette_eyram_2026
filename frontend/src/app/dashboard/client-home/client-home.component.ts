@@ -19,6 +19,9 @@ export class ClientHomeComponent implements OnInit {
   clientName: string = 'Client';
   lastTransaction: Transaction | null = null;
   loading = true;
+  
+  // AJOUT : Cette variable est nécessaire pour le pipe | date dans votre HTML
+  today: Date = new Date(); 
 
   constructor(
     private bankService: BankService,

@@ -1,12 +1,11 @@
-<div>
-  <div *ngIf="loading" class="flex justify-center items-center py-20 min-h-[400px]">
-    <div class="relative">
-      <div class="h-20 w-20 animate-spin rounded-full border-2 border-emerald-500/20 border-t-emerald-600"></div>
-      <div class="absolute inset-0 flex items-center justify-center font-black text-black text-[10px] tracking-tighter">EGABANK</div>
-    </div>
+<div class="min-h-screen bg-white p-6 lg:p-12">
+
+  <div *ngIf="loading" class="flex flex-col justify-center items-center py-40">
+    <div class="h-12 w-12 border-t-2 border-black animate-spin rounded-full mb-4"></div>
+    <span class="text-[10px] font-bold tracking-[0.5em] uppercase text-black">Initialisation sécurisée</span>
   </div>
 
-  <div *ngIf="!loading" class="animate-fade-in-up">
+  <div *ngIf="!loading" class="max-w-7xl mx-auto space-y-16">
 
     <ng-container *ngIf="authService.getUserType() === 'ADMIN'">
       <app-admin-home></app-admin-home>
@@ -14,129 +13,100 @@
 
     <ng-container *ngIf="authService.getUserType() !== 'ADMIN'">
 
-      <div class="mb-10">
-        <div
-          class="bg-black rounded-3xl p-8 md:p-10 text-white shadow-2xl shadow-emerald-900/10 relative overflow-hidden border border-white/5">
-
-          <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-emerald-600/20 blur-[100px]"></div>
-          <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-emerald-900/30 blur-[100px]"></div>
-
-          <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
-            <div class="flex items-center gap-6">
-              <div
-                class="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white shadow-2xl font-black text-3xl transform -rotate-3 border-4 border-white/10">
-                {{ clientName.charAt(0) }}
-              </div>
-              <div>
-                <p class="text-emerald-500 text-xs font-black uppercase tracking-[0.2em] mb-1">Espace Client Privé</p>
-                <h2 class="text-4xl font-bold font-primary text-white tracking-tight">Miaté, {{ clientName }}</h2>
-                <p class="text-slate-500 text-sm mt-1">Heureux de vous revoir sur votre portail.</p>
-              </div>
+      <header class="border-b border-black/5 pb-16">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-12">
+          
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <span class="text-[10px] font-bold tracking-[0.4em] uppercase text-emerald-600">Espace Privé</span>
+              <div class="h-px w-12 bg-black/10"></div>
             </div>
+            <h2 class="text-5xl font-light tracking-tighter italic text-black">Miaté, {{ clientName }}.</h2>
+            <p class="text-black/40 text-xs uppercase tracking-[0.2em] font-medium">Votre patrimoine à la date du {{ today | date:'dd.MM.yyyy' }}</p>
+          </div>
 
-            <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl min-w-[280px]">
-              <p class="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-2">Solde Total Disponible</p>
-              <h1 class="text-4xl font-black text-white tracking-tighter">
-                {{ totalBalance | number: '1.0-0' }} <span class="text-lg text-emerald-500 ml-1 font-bold">FCFA</span>
-              </h1>
-              <div class="flex gap-4 mt-6">
-                <a routerLink="/dashboard/transactions"
-                   class="flex-1 px-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black rounded-xl transition-all text-center uppercase tracking-widest">
-                  Virement
-                </a>
-                <a routerLink="/dashboard/accounts"
-                   class="flex-1 px-4 py-3 bg-white text-black hover:bg-slate-200 text-[10px] font-black rounded-xl transition-all text-center uppercase tracking-widest">
-                  Détails
-                </a>
-              </div>
+          <div class="w-full md:w-auto text-right space-y-4">
+            <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-black/30">Solde Total Consolidé</p>
+            <h1 class="text-6xl font-light tracking-tighter text-black">
+              {{ totalBalance | number: '1.0-0' }} <span class="text-xl font-bold tracking-normal opacity-20 ml-2">FCFA</span>
+            </h1>
+            <div class="flex justify-end gap-6 pt-4">
+              <a routerLink="/dashboard/transactions" class="text-[10px] font-bold uppercase tracking-[0.3em] text-black border-b border-black pb-1 hover:text-emerald-600 hover:border-emerald-600 transition-all">Transférer</a>
+              <a routerLink="/dashboard/accounts" class="text-[10px] font-bold uppercase tracking-[0.3em] text-black border-b border-black pb-1 hover:text-emerald-600 hover:border-emerald-600 transition-all">Gestion</a>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2 space-y-6">
-          <div class="flex justify-between items-center px-2">
-            <h3 class="text-xl font-black text-black uppercase tracking-tighter">Portefeuille Comptes</h3>
-            <a routerLink="/dashboard/accounts" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 uppercase tracking-widest">Gérer</a>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-20">
+        
+        <div class="lg:col-span-2 space-y-12">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold text-black uppercase tracking-[0.5em]">Portefeuille</h3>
+            <span class="text-[10px] text-black/40 italic">{{ accounts.length }} compte(s) actif(s)</span>
           </div>
 
-          <div *ngFor="let account of accounts"
-               class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-500 group">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-              <div class="flex items-center gap-5">
-                <div
-                  class="w-14 h-14 rounded-xl bg-slate-50 text-black flex items-center justify-center group-hover:bg-black group-hover:text-emerald-400 transition-all duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
-                  </svg>
-                </div>
+          <div class="space-y-1">
+            <div *ngFor="let account of accounts"
+                 class="group flex flex-col md:flex-row justify-between items-center py-8 border-b border-black/5 hover:border-black transition-all duration-500">
+              
+              <div class="flex items-center gap-8">
+                <div class="text-[10px] font-bold text-black/20 group-hover:text-black transition-colors tracking-widest italic font-serif">0{{ accounts.indexOf(account) + 1 }}</div>
                 <div>
-                  <h4 class="text-lg font-black text-black uppercase tracking-tight">{{ account.accountType }}</h4>
-                  <p class="text-slate-400 font-mono text-xs tracking-widest">{{ account.accountNumber }}</p>
+                  <h4 class="text-lg font-light text-black uppercase tracking-[0.1em] group-hover:italic transition-all">{{ account.accountType }}</h4>
+                  <p class="text-[10px] font-medium text-black/30 uppercase tracking-[0.2em] mt-1">{{ account.accountNumber }}</p>
                 </div>
               </div>
 
-              <div class="text-right">
-                <p class="text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Solde Actuel</p>
-                <p class="text-2xl font-black text-black group-hover:text-emerald-600 transition-colors">
-                  {{ account.balance | number: '1.0-0' }} <span class="text-sm font-bold opacity-50">CFA</span>
+              <div class="text-right mt-4 md:mt-0">
+                <p class="text-2xl font-light text-black tracking-tight group-hover:text-emerald-600 transition-colors">
+                  {{ account.balance | number: '1.0-0' }} <span class="text-xs font-bold opacity-10">CFA</span>
                 </p>
               </div>
             </div>
           </div>
 
-          <div *ngIf="accounts.length === 0" class="text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
-            <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">Aucun compte actif trouvé</p>
-            <a routerLink="/dashboard/accounts" class="mt-4 inline-block px-8 py-3 bg-black text-white text-[10px] font-black rounded-full uppercase tracking-widest">Ouvrir un compte</a>
+          <div *ngIf="accounts.length === 0" class="py-20 border border-dashed border-black/10 flex flex-col items-center">
+            <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-black/30">Aucun actif détecté</p>
+            <button class="mt-6 text-[10px] font-bold uppercase tracking-[0.3em] border border-black px-8 py-4 hover:bg-black hover:text-white transition-all">Initialiser un compte</button>
           </div>
         </div>
 
         <div class="lg:col-span-1">
-          <div class="bg-black text-white rounded-3xl p-8 shadow-2xl h-full flex flex-col relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-3xl"></div>
-
-            <h3 class="text-sm font-black uppercase tracking-widest mb-10 flex items-center justify-between">
-              Dernier Flux
-              <span class="flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-            </h3>
-
-            <div class="flex-1 flex flex-col items-center justify-center text-center space-y-4" *ngIf="!lastTransaction">
-              <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-slate-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+          <div class="bg-black p-10 text-white flex flex-col justify-between h-full min-h-[400px]">
+            
+            <div class="space-y-10">
+              <div class="flex justify-between items-center">
+                <h3 class="text-[10px] font-bold uppercase tracking-[0.4em]">Activité Récente</h3>
+                <div class="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
               </div>
-              <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest">En attente de mouvements</p>
-            </div>
 
-            <div class="flex-1 flex flex-col justify-between" *ngIf="lastTransaction">
-              <div class="space-y-6">
-                <div [class]="'w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl ' + (lastTransaction.amount > 0 ? 'bg-emerald-500 text-white' : 'bg-white text-black')">
-                  <svg *ngIf="lastTransaction.amount > 0" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
-                  <svg *ngIf="lastTransaction.amount <= 0" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-                </div>
+              <div *ngIf="!lastTransaction" class="py-12 text-center space-y-4">
+                <div class="h-px w-8 bg-white/20 mx-auto"></div>
+                <p class="text-[9px] uppercase tracking-[0.3em] text-white/40 italic font-light">En attente de transaction</p>
+              </div>
 
+              <div *ngIf="lastTransaction" class="space-y-8">
                 <div>
-                  <p class="text-emerald-500 text-[10px] font-black uppercase tracking-widest mb-1">{{ lastTransaction.transactionDate | date:'dd MMMM yyyy' }}</p>
-                  <h4 class="text-2xl font-black text-white leading-tight uppercase tracking-tighter">{{ lastTransaction.description || lastTransaction.transactionType }}</h4>
+                  <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-[0.3em] mb-4">Mouvement de fonds</p>
+                  <h4 class="text-3xl font-light italic tracking-tight leading-tight">{{ lastTransaction.description || lastTransaction.transactionType }}</h4>
+                  <p class="text-[10px] text-white/40 uppercase tracking-[0.3em] mt-2">{{ lastTransaction.transactionDate | date:'dd MMMM yyyy' }}</p>
                 </div>
 
-                <div [class]="'text-3xl font-black ' + (lastTransaction.amount > 0 ? 'text-emerald-400' : 'text-white')">
-                  {{ lastTransaction.amount > 0 ? '+' : '' }}{{ lastTransaction.amount | number:'1.0-0' }} <span class="text-sm">CFA</span>
+                <div class="text-4xl font-light tracking-tighter" [ngClass]="lastTransaction.amount > 0 ? 'text-emerald-400' : 'text-white'">
+                  {{ lastTransaction.amount > 0 ? '+' : '' }}{{ lastTransaction.amount | number:'1.0-0' }}
+                  <span class="text-xs uppercase tracking-widest opacity-40 ml-1">CFA</span>
                 </div>
               </div>
-
-              <a routerLink="/dashboard/transactions"
-                 class="mt-10 w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-emerald-600 hover:border-emerald-600 transition-all text-center">
-                Historique Complet
-              </a>
             </div>
+
+            <a routerLink="/dashboard/transactions" 
+               class="mt-12 block text-center py-5 border border-white/20 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-700">
+              Historique complet
+            </a>
           </div>
         </div>
+
       </div>
     </ng-container>
   </div>
